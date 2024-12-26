@@ -41,8 +41,15 @@ config.colors = {
 -- config.color_scheme = "Catppuccin Mocha" -- or Macchiato, Frappe, Latte
 -- config.color_scheme = 'Snazzy'
 
-config.font = wezterm.font('JetBrainsMono Nerd Font')
-config.font_size = 14
+local font = wezterm.font_with_fallback({
+  "JetBrainsMono Nerd Font",
+  "Hack Nerd Font",
+  "Noto Sans Symbols 2",
+  "Noto Sans Symbols",
+})
+config.font = font -- wezterm.font('JetBrainsMono Nerd Font')
+-- config.font = wezterm.font("MesloLGS Nerd Font Mono")
+config.font_size = 13
 
 config.enable_tab_bar = false
 
@@ -92,3 +99,4 @@ config.default_domain = 'WSL:Ubuntu'
 -- and finally, return the configuration to wezterm
 return config
 
+-- using WSL+windows this files is located in  /mnt/c/Users/li0nR
