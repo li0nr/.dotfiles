@@ -3,7 +3,7 @@ import = [
     # "~/.config/alacritty/themes/snazzy.toml"
     # "~/.config/alacritty/themes/gruvbox_dark.toml"
     # "~/.config/alacritty/themes/gruvbox_material_dark.toml"
-    "~/.config/alacritty/themes/cloud.toml"
+    # "~/.config/alacritty/themes/rose_pine_moon.toml"
 ]
 
 [env]
@@ -15,16 +15,15 @@ padding.y = 10
 
 decorations = "Buttonless"
 
-opacity = 1
+opacity = 0.9
 blur = true
 
 option_as_alt = "Both"
 
 [font]
 # normal.family = "MesloLGS Nerd Font Mono"
-normal.family = "JetBrainsMono Nerd Font"
-
-size = 18
+normal = {family = "JetBrainsMono Nerd Font Mono", style="Bold"}
+size = 12
 
 [keyboard]
 bindings = [
@@ -34,5 +33,6 @@ bindings = [
   { key = "Left",  mods = "Alt",        chars = "\u001BB" }, # jump word backwords
   { key = "a",     mods = "Control",    chars = "\u0001"  }, # jump start of line
   { key= "Key0",   mods=  "Control",    chars = "\u0005"  },  # jump end of line
+
 ]
 
