@@ -1,4 +1,3 @@
--- used in windows mainly, this should reside under /Users/{user}/.wezterm.lua
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 
@@ -21,57 +20,43 @@ local config = wezterm.config_builder()
 -- }
 --
 -- For example, changing the color scheme:
-config.color_scheme = "Cloud (terminal.sexy)"
-config.colors = {
-	-- background = '#3b224c',
-	-- background = "#181616", -- vague.nvim bg
-	-- background = "#080808", -- almost black
-	background = "#0c0b0f", -- dark purple
-	-- background = "#020202", -- dark purple
-	-- background = "#17151c", -- brighter purple
-	-- background = "#16141a",
-	-- background = "#0e0e12", -- bright washed lavendar
-	-- background = 'rgba(59, 34, 76, 100%)',
-	cursor_border = "#bea3c7",
-	-- cursor_fg = "#281733",
-	cursor_bg = "#bea3c7",
-	-- selection_fg = '#281733',
-}
+-- config.color_scheme = "Cloud (terminal.sexy)"
+-- config.color_scheme = "GruvboxDarkHard"
+-- config.colors = {
+-- 	-- background = '#3b224c',
+-- 	-- background = "#181616", -- vague.nvim bg
+-- 	-- background = "#080808", -- almost black
+-- 	background = "#0c0b0f", -- dark purple
+-- 	-- background = "#020202", -- dark purple
+-- 	-- background = "#17151c", -- brighter purple
+-- 	-- background = "#16141a",
+-- 	-- background = "#0e0e12", -- bright washed lavendar
+-- 	-- background = 'rgba(59, 34, 76, 100%)',
+-- 	cursor_border = "#bea3c7",
+-- 	-- cursor_fg = "#281733",
+-- 	cursor_bg = "#bea3c7",
+-- 	-- selection_fg = '#281733',
+-- }
 -- config.color_scheme = 'Tokyo Night'
 -- config.color_scheme = "Catppuccin Mocha" -- or Macchiato, Frappe, Latte
 -- config.color_scheme = 'Snazzy'
 
-local font = wezterm.font_with_fallback({
-  "JetBrainsMono Nerd Font",
-  "Hack Nerd Font",
-  "Noto Sans Symbols 2",
-  "Noto Sans Symbols",
-})
+local font = wezterm.font_with_fallback({ "JetBrainsMono Nerd Font", })
+config.warn_about_missing_glyphs = false
 config.font = font -- wezterm.font('JetBrainsMono Nerd Font')
--- config.font = wezterm.font("MesloLGS Nerd Font Mono")
-config.font_size = 13
+config.font_size = 11
 
 config.enable_tab_bar = false
 
-config.window_decorations = "TITLE | RESIZE"
--- config.window_background_opacity = 1
-config.macos_window_background_blur = 70
-config.audible_bell = "Disabled"
 config.window_close_confirmation = 'NeverPrompt'
+config.window_background_opacity = 0.93
+
+
+config.window_decorations = "INTEGRATED_BUTTONS" --TITLE " --|  RESIZE"
+
+config.audible_bell = "Disabled"
 config.keys = {
-    -- { -- this could replace ctrl c with copy
-    --     key = 'c',
-    --     mods = 'CTRL',
-    --     action = wezterm.action_callback(function(window, pane)
-    --         if pane:is_alt_screen_active() then
-    --             window:perform_action(wezterm.action.SendKey{ key='c', mods='CTRL' })
-    --             wezterm.log_info('alt screen active')
-    --         else
-    --             window:perform_action(wezterm.action{ CopyTo = 'ClipboardAndPrimarySelection' })
-    --             wezterm.log_info('regular copy')
-    --         end
-    --     end),
-    -- },
+
   { key = 'v',        mods = 'CTRL', action = wezterm.action { PasteFrom = 'Clipboard' } },
   -- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
   { key = "LeftArrow", mods = "OPT", action = wezterm.action { SendString = "\x1bb" } },
@@ -79,24 +64,13 @@ config.keys = {
   { key = "RightArrow", mods = "OPT", action = wezterm.action { SendString = "\x1bf" } },
   -- wezterm supports the ctrl-a 
   { key = '0', mods = 'CTRL', action = wezterm.action { SendString = "\x05" } },
-  {
-          key = "O",
-          mods = "CTRL|ALT",
-          -- toggling opacity
-          action = wezterm.action_callback(function(window, _)
-                  local overrides = window:get_config_overrides() or {}
-                  if overrides.window_background_opacity == 1.0 then
-                          overrides.window_background_opacity = 0.9
-                  else
-                          overrides.window_background_opacity = 1.0
-                  end
-                  window:set_config_overrides(overrides)
-          end),
-  },
-}
 
+  -- launch another instance with ctrl+shift
+  -- added some auto hot key mapping to launch with window+n
+  { key="n", mods="CTRL|CMD", action=wezterm.action.SpawnWindow},
+
+}
 config.default_domain = 'WSL:Ubuntu'
 -- and finally, return the configuration to wezterm
 return config
 
--- using WSL+windows this files is located in  /mnt/c/Users/li0nR
